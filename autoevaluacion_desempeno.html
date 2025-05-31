@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoevaluación de Desempeño</title>
+    <style>
+        :root {
+            --color-primary: #2E5A88;
+            --color-secondary: #4a90e2;
+            --color-accent: #f5a623;
+            --color-light: #f9f9f9;
+            --color-dark: #333;
+            --color-border: #ddd;
+            --color-success: #28a745;
+            --color-error: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background-color: var(--color-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2, h3 {
+            color: var(--color-primary);
+            margin-top: 0;
+        }
+
+        h1 {
+            border-bottom: 3px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .header-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+        }
+
+        .info-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--color-primary);
+        }
+
+        .info-group input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .instructions {
+            background-color: rgba(245, 166, 35, 0.1);
+            border-left: 4px solid var(--color-accent);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        tr:hover {
+            background-color: rgba(74, 144, 226, 0.05);
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(46, 90, 136, 0.05);
+            border-radius: 4px;
+        }
+
+        .scale-item {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .comments {
+            margin: 25px 0;
+        }
+
+        .comments textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-family: inherit;
+            min-height: 100px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin: 30px auto 0;
+            width: 250px;
+        }
+
+        .btn:hover {
+            background-color: #1f3b5d;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header-info {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Autoevaluación de Desempeño</h1>
+        <h2>Instrumento de evaluación basado en hechos del futuro</h2>
+        
+        <div class="header-info">
+            <div class="info-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Nombre completo">
+            </div>
+            <div class="info-group">
+                <label for="cargo">Cargo desempeñado</label>
+                <input type="text" id="cargo" placeholder="Puesto actual">
+            </div>
+            <div class="info-group">
+                <label for="area">Área o sección</label>
+                <input type="text" id="area" placeholder="Departamento/Área">
+            </div>
+            <div class="info-group">
+                <label for="fecha">Fecha de autoevaluación</label>
+                <input type="date" id="fecha">
+            </div>
+            <div class="info-group">
+                <label for="evaluador">Nombre del evaluador (si aplica)</label>
+                <input type="text" id="evaluador" placeholder="Opcional">
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Instrucciones:</h3>
+            <p>Lea con atención cada afirmación y marque con un número del 1 al 5 según qué tan frecuente o de qué manera ocurre en su día a día:</p>
+            <p><strong>Escala:</strong> 1 = Nunca | 2 = Rara vez | 3 = Algunas veces | 4 = Casi siempre | 5 = Siempre</p>
+        </div>
+        
+        <div class="rating-scale">
+            <div class="scale-item">1 - Nunca</div>
+            <div class="scale-item">2 - Rara vez</div>
+            <div class="scale-item">3 - Algunas veces</div>
+            <div class="scale-item">4 - Casi siempre</div>
+            <div class="scale-item">5 - Siempre</div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Indicador de desempeño</th>
+                    <th>Puntaje (1-5)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Cumplo los objetivos de mi cargo.</td>
+                    <td><input type="number" id="p1" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Organizo adecuadamente mis tareas.</td>
+                    <td><input type="number" id="p2" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tomo decisiones bien fundamentadas.</td>
+                    <td><input type="number" id="p3" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Me integro y colaboro con mi equipo.</td>
+                    <td><input type="number" id="p4" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Me comunico con claridad y respeto.</td>
+                    <td><input type="number" id="p5" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Soy flexible ante los cambios.</td>
+                    <td><input type="number" id="p6" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Busco mejorar mis habilidades.</td>
+                    <td><input type="number" id="p7" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Estoy alineado con los valores de la empresa.</td>
+                    <td><input type="number" id="p8" min="1" max="5" style="width: 50px;"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="comments">
+            <h3>Comentarios personales</h3>
+            <label for="fortalezas">Fortalezas que identifico en mí mismo/a:</label>
+            <textarea id="fortalezas" placeholder="Escriba aquí sus principales fortalezas..."></textarea>
+            
+            <label for="mejoras">Aspectos que debo mejorar:</label>
+            <textarea id="mejoras" placeholder="Escriba aquí los aspectos que necesita mejorar..."></textarea>
+            
+            <label for="crecimiento">Ideas para continuar creciendo profesionalmente:</label>
+            <textarea id="crecimiento" placeholder="Escriba aquí sus ideas para desarrollo profesional..."></textarea>
+        </div>
+        
+        <div class="signature">
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <div style="width: 45%;">
+                    <label for="firma">Firma del trabajador</label>
+                    <input type="text" id="firma" style="border: none; border-bottom: 1px solid var(--color-border); width: 100%; padding: 8px 0;">
+                </div>
+                <div style="width: 45%;">
+                    <label for="fecha-firma">Fecha</label>
+                    <input type="date" id="fecha-firma" style="width: 100%;">
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="guardarEvaluacion()">Guardar Autoevaluación</button>
+        
+        <div class="footer">
+            Instrumento de Autoevaluación de Desempeño © <span id="year"></span>
+        </div>
+    </div>
+
+    <script>
+        // Establecer año actual
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Establecer fecha actual por defecto
+        document.getElementById('fecha').valueAsDate = new Date();
+        document.getElementById('fecha-firma').valueAsDate = new Date();
+
+        function guardarEvaluacion() {
+            const nombre = document.getElementById('nombre').value || 'No especificado';
+            const cargo = document.getElementById('cargo').value || 'No especificado';
+            const area = document.getElementById('area').value || 'No especificado';
+            const fecha = document.getElementById('fecha').value || new Date().toISOString().split('T')[0];
+            const evaluador = document.getElementById('evaluador').value || 'No aplica';
+            
+            // Obtener puntajes
+            let puntajes = [];
+            let total = 0;
+            
+            for (let i = 1; i <= 8; i++) {
+                const valor = document.getElementById(`p${i}`).value || '0';
+                puntajes.push(valor);
+                total += parseInt(valor);
+            }
+            
+            // Calcular promedio
+            const promedio = (total / 8).toFixed(2);
+            
+            // Obtener comentarios
+            const fortalezas = document.getElementById('fortalezas').value || 'No especificado';
+            const mejoras = document.getElementById('mejoras').value || 'No especificado';
+            const crecimiento = document.getElementById('crecimiento').value || 'No especificado';
+            
+            // Obtener firma y fecha
+            const firma = document.getElementById('firma').value || 'No firmado';
+            const fechaFirma = document.getElementById('fecha-firma').value || fecha;
+            
+            // Crear CSV con los resultados
+            let csv = `Autoevaluación de Desempeño\n\n`;
+            csv += `Información del trabajador\n`;
+            csv += `Nombre completo,${nombre.replace(/"/g, '""')}\n`;
+            csv += `Cargo desempeñado,${cargo.replace(/"/g, '""')}\n`;
+            csv += `Área o sección,${area.replace(/"/g, '""')}\n`;
+            csv += `Fecha de autoevaluación,${fecha}\n`;
+            csv += `Evaluador,${evaluador.replace(/"/g, '""')}\n\n`;
+            
+            csv += `Resultados de la evaluación\n`;
+            csv += `Indicador,Puntaje (1-5)\n`;
+            
+            const indicadores = [
+                'Cumplo los objetivos de mi cargo',
+                'Organizo adecuadamente mis tareas',
+                'Tomo decisiones bien fundamentadas',
+                'Me integro y colaboro con mi equipo',
+                'Me comunico con claridad y respeto',
+                'Soy flexible ante los cambios',
+                'Busco mejorar mis habilidades',
+                'Estoy alineado con los valores de la empresa'
+            ];
+            
+            for (let i = 0; i < 8; i++) {
+                csv += `"${indicadores[i]}",${puntajes[i]}\n`;
+            }
+            
+            csv += `\nPuntaje total,${total}/40\n`;
+            csv += `Promedio,${promedio}\n\n`;
+            
+            csv += `Comentarios personales\n`;
+            csv += `Fortalezas,"${fortalezas.replace(/"/g, '""')}"\n`;
+            csv += `Aspectos a mejorar,"${mejoras.replace(/"/g, '""')}"\n`;
+            csv += `Crecimiento profesional,"${crecimiento.replace(/"/g, '""')}"\n\n`;
+            
+            csv += `Firma del trabajador,${firma.replace(/"/g, '""')}\n`;
+            csv += `Fecha de firma,${fechaFirma}\n`;
+            
+            // Crear blob y descargar
+            const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `Autoevaluacion_Desempeno_${nombre.replace(/\s+/g, '_')}_${fecha}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
